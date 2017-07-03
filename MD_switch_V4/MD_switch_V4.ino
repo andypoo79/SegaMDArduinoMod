@@ -2,7 +2,7 @@
 // plans to control overclock soon
 // JP1 will switch region
 // JP3 will switch 50/60 HZ display
-
+//
 
 //setup pin 2 and 3 as outputs, labled LED as was tested with LEDS before using transducers
 //setup A0 as button in, 5v to switch resistor to ground and lead to A0 between switch and resistor
