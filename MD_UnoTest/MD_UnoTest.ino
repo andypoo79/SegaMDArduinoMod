@@ -80,14 +80,6 @@ void loop() {
    digitalWrite(JP1, LOW);
    digitalWrite(JP3, HIGH);
    //display.fillScreen(BLACK);
-   display.setTextColor(BLACK);
-   display.setCursor(0,10);
-   display.print("USA NTSC ");
-   display.setCursor(0,20);
-   display.print("JAP NTSC ");
-   display.setTextColor(WHITE);
-   display.setCursor(0,0);
-   display.print("U.K PAL ");
    
 
 }
@@ -97,14 +89,7 @@ else if(count == 1)
    digitalWrite(JP3, LOW);
    //display.fillScreen(BLACK);
    //display.fillRect(0,0,5,200,BLACK);
-   display.setTextColor(BLACK);
-   display.setCursor(0,0);
-   display.print("U.K PAL ");
-   display.setCursor(0,20);
-   display.print("JAP NTSC ");
-   display.setTextColor(WHITE);
-   display.setCursor(0,10);
-   display.print("USA NTSC ");
+   
    
 }
 else if(count == 2)
@@ -113,14 +98,7 @@ else if(count == 2)
    digitalWrite(JP3, LOW);
    //display.fillScreen(BLACK);
    //display.fillRect(0,10,5,200,BLACK);
-   display.setTextColor(BLACK);
-   display.setCursor(0,0);
-   display.print("U.K PAL ");
-   display.setCursor(0,10);
-   display.print("USA NTSC ");
-   display.setTextColor(WHITE);
-   display.setCursor(0,20);
-   display.print("JAP NTSC ");
+  
 
 }
 
