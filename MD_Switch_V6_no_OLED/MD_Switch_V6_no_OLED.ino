@@ -28,18 +28,24 @@ byte ButtonStateRegion;
 byte ButtonStateClock;
 byte ButtonStateLang;
 byte lastStateRegion = LOW;
+byte lastStateLang = LOW;
+byte lastStateClock = LOW;
 byte countRegion = 0;
-byte countHZ = 0;
+byte countLang = 0;
 byte countClock = 0;
 const byte ButtonRegion = A0;
-const byte ButtonHZ = A1;
+const byte ButtonLang = A1;
 const byte ButtonClock = A2;
 const int JP1 = 2;
 const int JP3 = 3;
-const int JPReset = 4;
+const int JPHalt = 4;
 // Depending if i use relay or transitsor
 const int Mhz7 = 5;
 const int Mhz10 = 6;
+
+// Region JP3 = PAL 50hz, NTSC 60hz
+// Lang JP1 = USA, JAP, UK
+// Clock = 7Mhz, 10Mhz  
 
 void setup() {
   
@@ -57,10 +63,10 @@ void setup() {
   pinMode(ButtonRegion, INPUT);
   pinMode(JP1, OUTPUT);
   pinMode(JP3, OUTPUT);
-  pinMode(JPReset, OUTPUT);
+  pinMode(JPHalt, OUTPUT);
   int stateJP1 = LOW;
   int stateJP3 = LOW;
-  int stateJPReset = LOW;
+  int stateJPHalt = LOW;
 }
 
 void loop() {
@@ -69,7 +75,7 @@ void loop() {
   
   if(ButtonStateRegion && ButtonStateRegion != lastStateRegion)  // button latch, no debounce needed!!!!!
   {
-    if(countRegion < 2) // This will check to see if the count is within a range of 0 - 2, over that, it will reset count back to 0.
+    if(countRegion < 1) // This will check to see if the count is within a range of 0 - 2, over that, it will reset count back to 0.
       countRegion += 1; // same as count = count + 1;
     else
       countRegion = 0;
@@ -88,10 +94,62 @@ void loop() {
    digitalWrite(JP1, LOW);
    digitalWrite(JP3, LOW);}
    //USA
+ 
+  ButtonStateLang = digitalRead(ButtonLang);
+  
+  if(ButtonStateLang && ButtonStateLang != lastStateLang)  // button latch, no debounce needed!!!!!
+  {
+    if(countLang < 2) // This will check to see if the count is within a range of 0 - 2, over that, it will reset count back to 0.
+      countLang += 1; // same as count = count + 1;
+    else
+      countLang = 0;
+
+  } 
+  lastStateLang = ButtonStateLang;
+
+  if    (countLang == 0){
+   digitalWrite(JP1, LOW);
+   digitalWrite(JP3, HIGH);}
+   //UK
    
-  else if(countRegion == 2){
+
+  
+  else if(countLang == 1){ 
+   digitalWrite(JP1, LOW);
+   digitalWrite(JP3, LOW);}
+   //USA
+   
+  else if(countLang == 2){
    digitalWrite(JP1, HIGH);
    digitalWrite(JP3, LOW);}
    //JAP
+ButtonStateClock = digitalRead(ButtonClock);
+  
+  if(ButtonStateClock && ButtonStateClock != lastStateClock)  // button latch, no debounce needed!!!!!
+  {
+    if(countClock < 1) // This will check to see if the count is within a range of 0 - 2, over that, it will reset count back to 0.
+      countClock += 1; // same as count = count + 1;
+    else
+      countClock = 0;
 
+  } 
+  lastStateClock = ButtonStateClock;
+
+  if    (countClock == 0){
+   digitalWrite(JPHalt, HIGH); 
+   delay(500);
+   digitalWrite(Mhz7, HIGH);
+   digitalWrite(Mhz10, LOW);
+   delay(500);
+   digitalWrite(JPHalt, LOW);}
+   //Standard
+   
+
+  
+  else if(countClock == 1){ 
+   digitalWrite(JPHalt, HIGH); 
+   digitalWrite(Mhz7, LOW);
+   digitalWrite(Mhz10, HIGH);
+   digitalWrite(JPHalt, LOW); }
+   //Overclocked
 }
