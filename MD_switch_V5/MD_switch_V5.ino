@@ -1,19 +1,9 @@
-// Sega Megadrive switch Mod using Arduino nano to control switching and OLED display to show region select
-// plans to control overclock soon
-// JP1 will switch region
-// JP3 will switch 50/60 HZ display
-//
-
-//setup pin 2 and 3 as outputs, labled LED as was tested with LEDS before using transducers
-//setup A0 as button in, 5v to switch resistor to ground and lead to A0 between switch and resistor
-
 // LCD SETUP
 #define sclk 13
 #define mosi 7
 #define cs   10
 #define rst  9
 #define dc   8
-
 
 // Color definitions
 #define  BLACK           0x0000
@@ -37,6 +27,8 @@ byte ButtonStateClock;
 byte ButtonStateLang;
 byte lastStateRegion = LOW;
 byte count = 0;
+byte countHZ = 0;
+byte countClock = 0;
 const byte ButtonRegion = A0;
 const byte ButtonHZ = A1;
 const byte ButtonClock = A2;
