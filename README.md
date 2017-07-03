@@ -8,12 +8,16 @@ Select region language
 Select Display Frequency (PAL/NTSC) 50HZ or 60 HZ respectivley
 Selcet clock speed of 7Mhz (standard) and 10Mhz (Overclock)
 
+Parts Required
 
-/// below information as a reminder for me!
+1 x Model 1 PAL Sega Megadrive ( may work on others, untested )
+BC548B NPN Transistors x 5
+10MHZ Xtal Quartz Crystal Osc Oscillator 5V HCMOS TTL x 1
+Arduino nano x 1
+0.96" OLED Colour Display x 1
+Small N/O mommentary push switch x3
+wire
+soldering iron and solder
+patience
+time
 
-JP1 will switch region
-JP3 will switch 50/60 HZ display
-
-
-setup pin 2 and 3 as outputs, labled LED as was tested with LEDS before using transducers
-setup A0 as button in, 5v to switch resistor to ground and lead to A0 between switch and resistor
