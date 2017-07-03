@@ -32,10 +32,12 @@
 Adafruit_SSD1331 display = Adafruit_SSD1331(cs, dc, mosi, sclk, rst);  
 
 float p = 3.1415926;
-byte ButtonState;
-byte lastState = LOW;
+byte ButtonStateRegion;
+byte ButtonStateClock;
+byte ButtonStateLang;
+byte lastStateRegion = LOW;
 byte count = 0;
-const byte Button = A0;
+const byte ButtonRegion = A0;
 const byte ButtonHZ = A1;
 const byte ButtonClock = A2;
 const int JP1 = 2;
@@ -58,18 +60,20 @@ void setup() {
   delay(1000);
   display.fillScreen(BLACK);
   display.setTextSize(1);
-  pinMode(Button, INPUT);
+  pinMode(ButtonRegion, INPUT);
   pinMode(JP1, OUTPUT);
   pinMode(JP3, OUTPUT);
+  pinMode(JPReset, OUTPUT);
   int stateJP1 = LOW;
   int stateJP3 = LOW;
+  int stateJPReset = LOW;
 }
 
 void loop() {
   //delay(3000);
-  ButtonState = digitalRead(Button);
+  ButtonStateRegion = digitalRead(ButtonRegion);
   
-  if(ButtonState && ButtonState != lastState)  // button latch, no debounce needed!!!!!
+  if(ButtonStateRegion && ButtonStateRegion != lastStateRegion)  // button latch, no debounce needed!!!!!
   {
     if(count < 2) // This will check to see if the count is within a range of 0 - 2, over that, it will reset count back to 0.
       count += 1; // same as count = count + 1;
@@ -77,7 +81,7 @@ void loop() {
       count = 0;
 
   } 
-  lastState = ButtonState;
+  lastStateRegion = ButtonStateRegion;
 
   if    (count == 0)
 { 
