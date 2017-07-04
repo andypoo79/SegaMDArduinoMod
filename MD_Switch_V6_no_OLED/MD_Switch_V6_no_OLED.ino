@@ -48,7 +48,20 @@ const int Mhz10 = 6;
 // Clock = 7Mhz, 10Mhz  
 
 void setup() {
-  
+
+  pinMode(ButtonRegion, INPUT);
+  pinMode(JP1, OUTPUT);
+  pinMode(JP3, OUTPUT);
+  pinMode(JPHalt, OUTPUT);
+  pinMode(Mhz7, OUTPUT);
+  pinMode(Mhz10, OUTPUT);
+  // pin13 to turn arduino nano light off
+  pinMode(13, OUTPUT);
+  digitalWrite(13, LOW);
+  int stateMhz7 = HIGH;
+  int stateJP1 = LOW;
+  int stateJP3 = LOW;
+  int stateJPHalt = LOW;
   
   display.begin();
   display.fillScreen(BLUE);
@@ -60,18 +73,7 @@ void setup() {
   delay(1000);
   display.fillScreen(BLACK);
   display.setTextSize(1);
-  pinMode(ButtonRegion, INPUT);
-  pinMode(JP1, OUTPUT);
-  pinMode(JP3, OUTPUT);
-  pinMode(JPHalt, OUTPUT);
-  pinMode(Mhz7, OUTPUT);
-  pinMode(Mhz10, OUTPUT);
-  pinMode(13, OUTPUT);
-  digitalWrite(13, LOW);
-  int stateMhz7 = HIGH;
-  int stateJP1 = LOW;
-  int stateJP3 = LOW;
-  int stateJPHalt = LOW;
+  
 }
 
 void loop() {
@@ -142,19 +144,21 @@ ButtonStateClock = digitalRead(ButtonClock);
 
   if    (countClock == 0){
    digitalWrite(JPHalt, HIGH); 
-   delay(500);
+   delay(1000);
    digitalWrite(Mhz7, HIGH);
    digitalWrite(Mhz10, LOW);
-   delay(500);
+   delay(1000);
    digitalWrite(JPHalt, LOW);}
    //Standard
    
 
   
   else if(countClock == 1){ 
-   digitalWrite(JPHalt, HIGH); 
+   digitalWrite(JPHalt, HIGH);
+   delay(1000);
    digitalWrite(Mhz7, LOW);
    digitalWrite(Mhz10, HIGH);
+   delay(1000);
    digitalWrite(JPHalt, LOW); }
    //Overclocked
 }
