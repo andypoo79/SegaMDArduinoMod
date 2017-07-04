@@ -64,6 +64,11 @@ void setup() {
   pinMode(JP1, OUTPUT);
   pinMode(JP3, OUTPUT);
   pinMode(JPHalt, OUTPUT);
+  pinMode(Mhz7, OUTPUT);
+  pinMode(Mhz10, OUTPUT);
+  pinMode(13, OUTPUT);
+  digitalWrite(13, LOW);
+  int stateMhz7 = HIGH;
   int stateJP1 = LOW;
   int stateJP3 = LOW;
   int stateJPHalt = LOW;
